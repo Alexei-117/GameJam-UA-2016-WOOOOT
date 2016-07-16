@@ -3,6 +3,23 @@ using System.Collections;
 
 public class respawnSelect : MonoBehaviour {
 
+
+    void cambiarTierra()
+    {
+        
+        //Juego.cambiarTierra();
+    }
+    void cambiarAgua()
+    {
+
+        //Juego.cambiarAgua();
+    }
+    void cambiarAire()
+    {
+
+        //Juego.cambiarAire();
+    }
+
 	// Use this for initialization
 	void Start () {
 	
