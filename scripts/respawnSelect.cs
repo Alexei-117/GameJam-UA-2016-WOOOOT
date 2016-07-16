@@ -6,14 +6,17 @@ public class respawnSelect : MonoBehaviour {
 
     void cambiarTierra()
     {
+        
         //Juego.cambiarTierra();
     }
     void cambiarAgua()
     {
+
         //Juego.cambiarAgua();
     }
     void cambiarAire()
     {
+
         //Juego.cambiarAire();
     }
 
