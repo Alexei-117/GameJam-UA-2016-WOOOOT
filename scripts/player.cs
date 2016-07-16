@@ -39,22 +39,35 @@ public class player : MonoBehaviour {
 		} else
 			animator.CrossFade ("playerTierraIdle", 0);
 
-		if (Input.GetButtonDown ("Jump")) {
+		if (rb2D.velocity.y == 0 && Input.GetButtonDown ("Jump")) {
 			rb2D.AddForce (new Vector2 (0, 5), ForceMode2D.Impulse);
 		}
 
-		if (Input.GetButton ("Fire1")) {
-
+		if (Input.GetButtonDown ("Fire1")) {
+			animator.CrossFade ("playerTierraChop", 0);
+			animator.CrossFade ("playerTierraIdle", 0);
 		}
 
 		Vector3 move = new Vector3 (horizontal, 0, 0)/25;
 		//transform.position += move;
 		transform.position = transform.position + move;
 	}
-	void onCollisionEnter2D (Collider2D coll) {
-		Debug.Log (coll.gameObject.tag);
-		if (coll.gameObject.tag == "Wall") {
-			animator.SetTrigger ("playerTierraChop");
+
+	void OnTriggerStay2D(Collider2D other) {
+		if (other.gameObject.tag == "Wall") {
+			if (Input.GetButtonDown ("Fire1")) {
+				other.gameObject.SetActive (false);
+			}
+		} else if (other.gameObject.tag == "Spikes") {
+			Die ();
+		} else if (other.gameObject.tag == "Water") {
+			Die ();
+		} else if (other.gameObject.tag == "Switch") {
+			other.gameObject.SendMessage ("onActivated");
 		}
+	}
+
+	void Die() {
+		 //Llama a la pantalla de muerte.
 	}
 }
