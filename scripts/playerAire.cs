@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class player : MonoBehaviour {
+public class playerAire : MonoBehaviour {
 
 	private Animator animator;
 	private BoxCollider2D boxCollider;
@@ -22,30 +22,24 @@ public class player : MonoBehaviour {
 		bool trigger = false;
 		int horizontal = (int)Input.GetAxisRaw ("Horizontal");
 
-
 		if (horizontal > 0) {
-			animator.SetTrigger ("playerTierraWalk");
+			animator.SetTrigger ("playerAireWalk");
 			if (goingRight != true) {
 				animator.transform.Rotate (0, 180, 0);
 				goingRight = true;
 			}
 		} else if (horizontal < 0) {
-			animator.SetTrigger ("playerTierraWalk");
+			animator.SetTrigger ("playerAireWalk");
 			if (goingRight == true) {
 				animator.transform.Rotate (0, 180, 0);
 				goingRight = false;
 			}
 
 		} else
-			animator.CrossFade ("playerTierraIdle", 0);
+			animator.CrossFade ("playerAireIdle", 0);
 
-		if (rb2D.velocity.y == 0 && Input.GetButtonDown ("Jump")) {
+		if (/*rb2D.velocity.y == 0 && */Input.GetButtonDown ("Jump")) {
 			rb2D.AddForce (new Vector2 (0, 5), ForceMode2D.Impulse);
-		}
-
-		if (Input.GetButtonDown ("Fire1")) {
-			animator.CrossFade ("playerTierraChop", 0);
-			animator.CrossFade ("playerTierraIdle", 0);
 		}
 
 		Vector3 move = new Vector3 (horizontal, 0, 0)/25;
@@ -54,11 +48,7 @@ public class player : MonoBehaviour {
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
-		if (other.gameObject.tag == "Wall") {
-			if (Input.GetButtonDown ("Fire1")) {
-				other.gameObject.SetActive (false);
-			}
-		} else if (other.gameObject.tag == "Spikes") {
+		if (other.gameObject.tag == "Spikes") {
 			Die ();
 		} else if (other.gameObject.tag == "Water") {
 			Die ();
@@ -68,6 +58,7 @@ public class player : MonoBehaviour {
 	}
 
 	void Die() {
+		this.gameObject.SetActive (false);
 		 //Llama a la pantalla de muerte.
 	}
 }

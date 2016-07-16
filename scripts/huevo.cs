@@ -5,6 +5,7 @@ using System.Collections;
 public class huevo : MonoBehaviour {
 
 
+	private Animator animator;
     public static bool CheckpointActive = false;
     public static Vector2 checkpoint;
 
@@ -17,14 +18,18 @@ public class huevo : MonoBehaviour {
         }
     }
 
+	void animationRespawn() {
+		animator.SetTrigger ("nidoRespawn");
+	}
 
     // Use this for initialization
-    void Start () {
+	void Start () {
+		animator = GetComponent<Animator>();
 	    
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+
 	}
 }
